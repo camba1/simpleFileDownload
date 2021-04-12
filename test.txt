@@ -1,0 +1,4 @@
+https://www.learningcontainer.com/wp-content/uploads/2020/04/sample-text-file.txt
+https://www.learningcontainer.com/wp-content/uploads/2019/09/sample-pdf-file.pdf
+https://tools.learningcontainer.com/sample-json-file.json
+https://tools.learningcontainer.com/sample-json-file.json
