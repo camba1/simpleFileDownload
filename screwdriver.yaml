@@ -58,5 +58,7 @@ jobs:
       - ~commit
     steps:
       - ls: echo $(ls)
+      - start: service docker start
+      - status: service docker status
       - doc: docker build -t testimage .
       - parms: 'echo "Param1 $(meta get parameters.param1), Param2 $(meta get parameters.param2.value)"'
