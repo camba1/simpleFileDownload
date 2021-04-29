@@ -7,9 +7,16 @@ shared:
   # A map of environment variables that we want to set
   environment:
     GOPATH: /sd/workspace
+  # annotations to control amount of cpu and ram used
   annotations:
     screwdriver.cd/cpu: MICRO
     screwdriver.cd/ram: MICRO
+# Parameters that can be used in steps
+parameters:
+  param1: "value1"
+  param2:
+    value: "value2"
+    description: "param2 rocks!"
 # Jobs definition block
 jobs:
   main:
@@ -32,6 +39,8 @@ jobs:
       - doc: echo $(ls /var/run | grep -i docker)
       # display content of TEST_SECRET as configured in the GUI
       - mysecrets: echo $TEST_SECRET
+      # display params
+      - parms: 'echo "Param1 $(meta get parameters.param1), Param2 $(meta get parameters.param2.value)"'
     # enable secrets used in this pipeline
     secrets:
       - TEST_SECRET
