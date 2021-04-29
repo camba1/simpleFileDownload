@@ -11,7 +11,8 @@ shared:
   annotations:
     screwdriver.cd/cpu: MICRO
     screwdriver.cd/ram: MICRO
-# Parameters that can be used in steps
+# Parameters that can be used in steps, the values provided are defaults
+# and can be overridden in the gui at build time
 parameters:
   param1: "value1"
   param2:
@@ -50,3 +51,9 @@ jobs:
       email:
         addresses: [ information@bolbeck.com ]
         statuses: [ SUCCESS, FAILURE ]
+  second:
+    image: docker
+    steps:
+      - ls: echo $(ls)
+      - doc: echo $(ls /var/run | grep -i docker)
+      - parms: 'echo "Param1 $(meta get parameters.param1), Param2 $(meta get parameters.param2.value)"'
