@@ -30,6 +30,12 @@ jobs:
       # save file to artifact store
       - save: echo hello > $SD_ARTIFACTS_DIR/hello.txt
       - doc: echo $(ls /var/run | grep -i docker)
+      # display content of TEST_SECRET as configured in the GUI
       - mysecrets: echo $TEST_SECRET
+    # enable secrets used in this pipeline
     secrets:
       - TEST_SECRET
+    settings:
+      email:
+        addresses: [ information@bolbeck.com ]
+        statuses: [ SUCCESS, FAILURE ]
