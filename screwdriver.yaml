@@ -53,6 +53,9 @@ jobs:
         statuses: [ SUCCESS, FAILURE ]
   second:
     image: docker
+    requires:
+      - ~pr
+      - ~commit
     steps:
       - ls: echo $(ls)
       - doc: docker build -t testimage .
