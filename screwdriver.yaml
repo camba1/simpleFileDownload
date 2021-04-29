@@ -7,7 +7,9 @@ shared:
   # A map of environment variables that we want to set
   environment:
     GOPATH: /sd/workspace
-
+  annotations:
+    screwdriver.cd/cpu: MICRO
+    screwdriver.cd/ram: MICRO
 # Jobs definition block
 jobs:
   main:
