@@ -55,5 +55,5 @@ jobs:
     image: docker
     steps:
       - ls: echo $(ls)
-      - doc: echo $(ls /var/run | grep -i docker)
+      - doc: docker --version
       - parms: 'echo "Param1 $(meta get parameters.param1), Param2 $(meta get parameters.param2.value)"'
