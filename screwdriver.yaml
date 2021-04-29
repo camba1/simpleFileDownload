@@ -30,3 +30,6 @@ jobs:
       # save file to artifact store
       - save: echo hello > $SD_ARTIFACTS_DIR/hello.txt
       - doc: echo $(ls /var/run | grep -i docker)
+      - mysecrets: echo $TEST_SECRET
+    secrets:
+      - TEST_SECRET
