@@ -3,7 +3,7 @@
 # This is where you would define any attributes that all your jobs will
 # inherit.
 shared:
-  image: golang
+#  image: golang
   # A map of environment variables that we want to set
   environment:
     GOPATH: /sd/workspace
@@ -20,6 +20,7 @@ parameters:
 # Jobs definition block
 jobs:
   main:
+    image: golang
     requires:
       - ~pr
       - ~commit
@@ -44,6 +45,7 @@ jobs:
     # enable secrets used in this pipeline
     secrets:
       - TEST_SECRET
+    # setup email notifications
     settings:
       email:
         addresses: [ information@bolbeck.com ]
