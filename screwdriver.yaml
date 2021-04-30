@@ -9,6 +9,7 @@ shared:
     GOPATH: /sd/workspace
   # annotations to control amount of cpu and ram used
   annotations:
+    screwdriver.cd/dockerEnabled: true
     screwdriver.cd/cpu: MICRO
     screwdriver.cd/ram: MICRO
 # Parameters that can be used in steps, the values provided are defaults
@@ -51,14 +52,17 @@ jobs:
       email:
         addresses: [ information@bolbeck.com ]
         statuses: [ SUCCESS, FAILURE ]
-  second:
-    image: docker:dind
+  parallel:
+    image: node
     requires:
       - ~pr
       - ~commit
     steps:
       - ls: echo $(ls)
-      - start: service docker start
-      - status: service docker status
-      - doc: docker build -t testimage .
       - parms: 'echo "Param1 $(meta get parameters.param1), Param2 $(meta get parameters.param2.value)"'
+  sequential:
+    image: busybox
+    requires:
+      - main
+    steps:
+      - ls: echo $(ls)
