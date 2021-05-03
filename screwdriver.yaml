@@ -44,6 +44,7 @@ jobs:
       - mysecrets: echo $TEST_SECRET
       # display params
       - parms: 'echo "Param1 $(meta get parameters.param1), Param2 $(meta get parameters.param2.value)"'
+      - slp: sleep 5m
     # enable secrets used in this pipeline
     secrets:
       - TEST_SECRET
