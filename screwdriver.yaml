@@ -9,7 +9,7 @@ shared:
     GOPATH: /sd/workspace
   # annotations to control amount of cpu and ram used
   annotations:
-    screwdriver.cd/dockerEnabled: true
+    screwdriver.cd/dockerEnabled: false
     screwdriver.cd/cpu: MICRO
     screwdriver.cd/ram: MICRO
 # Parameters that can be used in steps, the values provided are defaults
