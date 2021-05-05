@@ -10,8 +10,8 @@ shared:
   # annotations to control amount of cpu and ram used
   annotations:
     screwdriver.cd/dockerEnabled: true
-    screwdriver.cd/cpu: MICRO
-    screwdriver.cd/ram: MICRO
+    screwdriver.cd/cpu: micro
+    screwdriver.cd/ram: micro
 # Parameters that can be used in steps, the values provided are defaults
 # and can be overridden in the gui at build time
 parameters:
@@ -59,7 +59,7 @@ jobs:
     steps:
       - ls: echo $(ls)
       - parms: 'echo "Param1 $(meta get parameters.param1), Param2 $(meta get parameters.param2.value)"'
-      - dock: echo $(ls /var/lib/d*.*)
+      - dock: echo $DOCKER_HOST
 #  parallel:
 #    image: node
 #    requires:
