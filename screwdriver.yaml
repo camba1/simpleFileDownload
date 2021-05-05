@@ -50,8 +50,8 @@ jobs:
 #      - dockinst: apt-get install docker-ce docker-ce-cli containerd.io
       - dock: DOCKER_HOST=tcp://localhost:2375 docker info
       - dock2: docker version
-#      - pack: (curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.18.1/pack-v0.18.1-linux.tgz" |  tar -C /usr/local/bin/ --no-same-owner -xzv pack)
-      - pack: (curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.13.1/pack-v0.13.1-linux.tgz" |  tar -C /usr/local/bin/ --no-same-owner -xzv pack)
+      - pack: (curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.18.1/pack-v0.18.1-linux.tgz" |  tar -C /usr/local/bin/ --no-same-owner -xzv pack)
+#      - pack: (curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.13.1/pack-v0.13.1-linux.tgz" |  tar -C /usr/local/bin/ --no-same-owner -xzv pack)
       - pack2: pack version
 #      - pack22: pack builder  suggest
       - pack3: pack build delme --builder paketobuildpacks/builder:tiny --docker-host 'inherit'
