@@ -54,6 +54,7 @@ jobs:
 #      - pack: (curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.13.1/pack-v0.13.1-linux.tgz" |  tar -C /usr/local/bin/ --no-same-owner -xzv pack)
       - pack2: pack version
 #      - pack22: pack builder  suggest
+      - dock3: export DOCKER_API_VERSION=1.37
       - pack3: pack build delme --builder paketobuildpacks/builder:tiny --docker-host 'inherit'
 #      - pack3: pack build delme --builder paketobuildpacks/builder:tiny --buildpack paketo-buildpacks/ca-certificates --buildpack paketo-buildpacks/go-dist --buildpack paketo-buildpacks/go-mod-vendor --buildpack paketo-buildpacks/go-build@0.2.2
 #      - pak3: docker build -t delme .
