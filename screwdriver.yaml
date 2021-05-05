@@ -22,7 +22,7 @@ parameters:
 # Jobs definition block
 jobs:
   main:
-    image: docker
+    image: docker:19
     requires:
       - ~pr
       - ~commit
