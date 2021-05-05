@@ -45,10 +45,7 @@ jobs:
       # display params
       - parms: 'echo "Param1 $(meta get parameters.param1), Param2 $(meta get parameters.param2.value)"'
 #      - dockinst: sudo apt-get install docker-ce docker-ce-cli containerd.io
-      - path0: apt-get install -y software-properties-common
-      - path: add-apt-repository ppa:cncf-buildpacks/pack-cli
-      - path2: apt-get update
-      - path3: apt-get install pack-cli
+      - path0: apk --no-cache add curl
 #      - dockinst: apt-get install docker-ce docker-ce-cli containerd.io
       - dock: DOCKER_HOST=tcp://localhost:2375 docker info
       - pack: (curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.18.1/pack-v0.18.1-linux.tgz" |  tar -C /usr/local/bin/ --no-same-owner -xzv pack)
