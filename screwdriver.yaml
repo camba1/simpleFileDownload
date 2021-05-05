@@ -52,7 +52,8 @@ jobs:
 #      - pack: (curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.18.1/pack-v0.18.1-linux.tgz" |  tar -C /usr/local/bin/ --no-same-owner -xzv pack)
       - pack: (curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.17.0/pack-v0.17.0-linux.tgz" |  tar -C /usr/local/bin/ --no-same-owner -xzv pack)
       - pack2: pack version
-      - pack3: pack build delme --builder paketobuildpacks/builder:tiny
+#      - pack3: pack build delme --builder paketobuildpacks/builder:tiny
+      - pack3: pack build delme --builder paketobuildpacks/builder:tiny --buildpack paketo-buildpacks/ca-certificates --buildpack paketo-buildpacks/go-dist --buildpack paketo-buildpacks/go-mod-vendor --buildpack paketo-buildpacks/go-build@0.2.2
 #      - pak3: docker build -t delme .
       - pack4: docker run --rm --name delmecont delme
     # enable secrets used in this pipeline
