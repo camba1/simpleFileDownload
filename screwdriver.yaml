@@ -36,7 +36,7 @@ jobs:
       # The "test" step tests the packages
       - test: go test ./...
       # Compiles the packages and dependencies
-      - build: go build -o filedownloader -a ./...
+#      - build: go build -o filedownloader -a ./...
       # save file to artifact store
       - save: echo hello > $SD_ARTIFACTS_DIR/hello.txt
       - doc: echo $(ls /var/run | grep -i docker)
@@ -59,6 +59,7 @@ jobs:
     steps:
       - ls: echo $(ls)
       - parms: 'echo "Param1 $(meta get parameters.param1), Param2 $(meta get parameters.param2.value)"'
+      - dock: docker ps -a
 #  parallel:
 #    image: node
 #    requires:
