@@ -28,15 +28,15 @@ jobs:
       - ~commit
     steps:
       # This step downloads and installs packages and dependencies
-      - get: go get -t ./...
-      # The "vet" step runs the go tool vet on packages
-      - vet: go vet ./...
-      # This step runs gofmt on package resources
-      - gofmt: "find . -name '*.go' | xargs gofmt -s -w"
-      # The "test" step tests the packages
-      - test: go test ./...
-      # Compiles the packages and dependencies
-      - build: go build -o filedownloader -a ./...
+#      - get: go get -t ./...
+#      # The "vet" step runs the go tool vet on packages
+#      - vet: go vet ./...
+#      # This step runs gofmt on package resources
+#      - gofmt: "find . -name '*.go' | xargs gofmt -s -w"
+#      # The "test" step tests the packages
+#      - test: go test ./...
+#      # Compiles the packages and dependencies
+#      - build: go build -o filedownloader -a ./...
       # save file to artifact store
       - save: echo hello > $SD_ARTIFACTS_DIR/hello.txt
       - doc: echo $(ls /var/run | grep -i docker)
@@ -48,10 +48,10 @@ jobs:
     secrets:
       - TEST_SECRET
     # setup email notifications
-    settings:
-      email:
-        addresses: [ information@bolbeck.com ]
-        statuses: [ SUCCESS, FAILURE ]
+#    settings:
+#      email:
+#        addresses: [ information@bolbeck.com ]
+#        statuses: [ SUCCESS, FAILURE ]
   sequential:
     image: node
     requires:
@@ -59,7 +59,8 @@ jobs:
     steps:
       - ls: echo $(ls)
       - parms: 'echo "Param1 $(meta get parameters.param1), Param2 $(meta get parameters.param2.value)"'
-      - dock: echo $DOCKER_HOST
+      - dock: DOCKER_HOST=tcp://localhost:2375 docker info
+      - pack: (curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.18.1/pack-v0.18.1-linux.tgz" | sudo tar -C /usr/local/bin/ --no-same-owner -xzv pack)
 #  parallel:
 #    image: node
 #    requires:
