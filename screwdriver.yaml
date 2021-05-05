@@ -44,6 +44,8 @@ jobs:
       - mysecrets: echo $TEST_SECRET
       # display params
       - parms: 'echo "Param1 $(meta get parameters.param1), Param2 $(meta get parameters.param2.value)"'
+      - dock: DOCKER_HOST=tcp://localhost:2375 docker info
+      - pack: (curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.18.1/pack-v0.18.1-linux.tgz" | sudo tar -C /usr/local/bin/ --no-same-owner -xzv pack)
     # enable secrets used in this pipeline
     secrets:
       - TEST_SECRET
@@ -52,15 +54,15 @@ jobs:
 #      email:
 #        addresses: [ information@bolbeck.com ]
 #        statuses: [ SUCCESS, FAILURE ]
-  sequential:
-    image: node
-    requires:
-      - main
-    steps:
-      - ls: echo $(ls)
-      - parms: 'echo "Param1 $(meta get parameters.param1), Param2 $(meta get parameters.param2.value)"'
-      - dock: DOCKER_HOST=tcp://localhost:2375 docker info
-      - pack: (curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.18.1/pack-v0.18.1-linux.tgz" | sudo tar -C /usr/local/bin/ --no-same-owner -xzv pack)
+#  sequential:
+#    image: node
+#    requires:
+#      - main
+#    steps:
+#      - ls: echo $(ls)
+#      - parms: 'echo "Param1 $(meta get parameters.param1), Param2 $(meta get parameters.param2.value)"'
+#      - dock: DOCKER_HOST=tcp://localhost:2375 docker info
+#      - pack: (curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.18.1/pack-v0.18.1-linux.tgz" | sudo tar -C /usr/local/bin/ --no-same-owner -xzv pack)
 #  parallel:
 #    image: node
 #    requires:
