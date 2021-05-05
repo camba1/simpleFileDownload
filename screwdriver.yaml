@@ -51,7 +51,8 @@ jobs:
       - dock2: docker version
       - pack: (curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.18.1/pack-v0.18.1-linux.tgz" |  tar -C /usr/local/bin/ --no-same-owner -xzv pack)
       - pack2: pack version
-      - pack3: pack build delme --builder paketobuildpacks/builder:tiny
+#      - pack3: pack build delme --builder paketobuildpacks/builder:tiny
+      - pak3: docker build -t delme .
       - pack4: docker run --rm --name delmecont delme
     # enable secrets used in this pipeline
     secrets:
