@@ -39,7 +39,7 @@ jobs:
 #      - build: go build -o filedownloader -a ./...
       # save file to artifact store
       - save: echo hello > $SD_ARTIFACTS_DIR/hello.txt
-      - doc: echo $(ls /var/run | grep -i docker)
+      - doc: echo $(ls)
       # display content of TEST_SECRET as configured in the GUI
       - mysecrets: echo $TEST_SECRET
       # display params
@@ -48,7 +48,9 @@ jobs:
       - path0: apk --no-cache add curl
 #      - dockinst: apt-get install docker-ce docker-ce-cli containerd.io
       - dock: DOCKER_HOST=tcp://localhost:2375 docker info
+      - dock2: docker version
       - pack: (curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.18.1/pack-v0.18.1-linux.tgz" |  tar -C /usr/local/bin/ --no-same-owner -xzv pack)
+      - pack2: pack version
     # enable secrets used in this pipeline
     secrets:
       - TEST_SECRET
