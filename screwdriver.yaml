@@ -22,7 +22,7 @@ parameters:
 # Jobs definition block
 jobs:
   main:
-    image: docker:18.05
+    image: docker
     requires:
       - ~pr
       - ~commit
@@ -51,22 +51,18 @@ jobs:
       - dock: DOCKER_HOST=tcp://localhost:2375 docker info
       - dock2: docker version
       - pack: (curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.18.1/pack-v0.18.1-linux.tgz" |  tar -C /usr/local/bin/ --no-same-owner -xzv pack)
-#      - pack: (curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.13.1/pack-v0.13.1-linux.tgz" |  tar -C /usr/local/bin/ --no-same-owner -xzv pack)
       - pack2: pack version
-#      - pack22: pack builder  suggest
-      - dock3: export DOCKER_API_VERSION=1.37
-      - pack3: pack build delme --builder paketobuildpacks/builder:tiny --docker-host 'inherit'
+#      - pack3: pack build delme --builder paketobuildpacks/builder:tiny --docker-host 'inherit'
 #      - pack3: pack build delme --builder paketobuildpacks/builder:tiny --buildpack paketo-buildpacks/ca-certificates --buildpack paketo-buildpacks/go-dist --buildpack paketo-buildpacks/go-mod-vendor --buildpack paketo-buildpacks/go-build@0.2.2
-#      - pak3: docker build -t delme .
-      - pack4: docker run --rm --name delmecont delme
+#      - pack4: docker run --rm --name delmecont delme
     # enable secrets used in this pipeline
     secrets:
       - TEST_SECRET
     # setup email notifications
-#    settings:
-#      email:
-#        addresses: [ information@bolbeck.com ]
-#        statuses: [ SUCCESS, FAILURE ]
+    settings:
+      email:
+        addresses: [ info@test.bi ]
+        statuses: [ SUCCESS, FAILURE ]
 #  sequential:
 #    image: node
 #    requires:
@@ -76,18 +72,18 @@ jobs:
 #      - parms: 'echo "Param1 $(meta get parameters.param1), Param2 $(meta get parameters.param2.value)"'
 #      - dock: DOCKER_HOST=tcp://localhost:2375 docker info
 #      - pack: (curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.18.1/pack-v0.18.1-linux.tgz" | sudo tar -C /usr/local/bin/ --no-same-owner -xzv pack)
-#  parallel:
-#    image: node
-#    requires:
-#      - ~pr
-#      - ~commit
-#    steps:
-#      - ls: echo $(ls)
-#      - parms: 'echo "Param1 $(meta get parameters.param1), Param2 $(meta get parameters.param2.value)"'
-#  sequential:
+  parallel:
+    image: node
+    requires:
+      - ~pr
+      - ~commit
+    steps:
+      - ls: echo $(ls)
+      - parms: 'echo "Param1 $(meta get parameters.param1), Param2 $(meta get parameters.param2.value)"'
+#  afterparallel:
 #    image: gcr.io/kaniko-project/executor:debug
 #    requires:
-#      - main
+#      - parallel
 #    steps:
 #      - kanikodir: mkdir -p /kaniko/.docker
 #      - ls: echo $(ls)
