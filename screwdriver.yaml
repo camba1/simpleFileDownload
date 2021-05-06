@@ -89,8 +89,8 @@ jobs:
     steps:
       - kanikodir: mkdir -p /kaniko/.docker
       - ls: echo $(ls)
-      - createconfig: echo "{\"auths\":{\"https://index.docker.io/v1/\":{\"auth\":\"$REGISTRY_AUTH\"}}}" > /kaniko/.docker/config.json
-      - check: cat /kaniko/.docker/config.json
+#      - createconfig: echo "{\"auths\":{\"https://index.docker.io/v1/\":{\"auth\":\"$REGISTRY_AUTH\"}}}" > /kaniko/.docker/config.json
+#      - check: cat /kaniko/.docker/config.json
 #      - buildimg: /kaniko/executor --context $DOCKER_CONTEXT --dockerfile $DOCKER_DIR/Dockerfile --destination $IMAGE_NAME:$IMAGE_TAG
     secrets:
       - REGISTRY_AUTH
