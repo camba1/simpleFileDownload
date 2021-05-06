@@ -46,10 +46,8 @@ jobs:
       - mysecrets: echo $TEST_SECRET
       # display params
       - parms: 'echo "Param1 $(meta get parameters.param1), Param2 $(meta get parameters.param2.value)"'
-#      - dockinst: sudo apt-get install docker-ce docker-ce-cli containerd.io
       - path0: apk --no-cache add curl
       - host: echo $DOCKER_HOST
-#      - dockinst: apt-get install docker-ce docker-ce-cli containerd.io
       - dock: DOCKER_HOST=tcp://localhost:2375 docker info
       - dock2: docker version
       - pack: (curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.18.1/pack-v0.18.1-linux.tgz" |  tar -C /usr/local/bin/ --no-same-owner -xzv pack)
@@ -72,8 +70,6 @@ jobs:
     steps:
       - ls: echo $(ls)
       - parms: 'echo "Param1 $(meta get parameters.param1), Param2 $(meta get parameters.param2.value)"'
-#      - dock: DOCKER_HOST=tcp://localhost:2375 docker info
-#      - pack: (curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.18.1/pack-v0.18.1-linux.tgz" | sudo tar -C /usr/local/bin/ --no-same-owner -xzv pack)
   parallel:
     image: node
     requires:
@@ -82,15 +78,3 @@ jobs:
     steps:
       - ls: echo $(ls)
       - parms: 'echo "Param1 $(meta get parameters.param1), Param2 $(meta get parameters.param2.value)"'
-#  afterparallel:
-#    image: gcr.io/kaniko-project/executor:debug
-#    requires:
-#      - parallel
-#    steps:
-#      - kanikodir: mkdir -p /kaniko/.docker
-#      - ls: echo $(ls)
-##      - createconfig: echo "{\"auths\":{\"https://index.docker.io/v1/\":{\"auth\":\"$REGISTRY_AUTH\"}}}" > /kaniko/.docker/config.json
-##      - check: cat /kaniko/.docker/config.json
-##      - buildimg: /kaniko/executor --context $DOCKER_CONTEXT --dockerfile $DOCKER_DIR/Dockerfile --destination $IMAGE_NAME:$IMAGE_TAG
-#    secrets:
-#      - REGISTRY_AUTH
