@@ -61,10 +61,10 @@ jobs:
     secrets:
       - TEST_SECRET
     # setup email notifications
-    settings:
-      email:
-        addresses: [ info@test.bi ]
-        statuses: [ SUCCESS, FAILURE ]
+#    settings:
+#      email:
+#        addresses: [ info@test.bi ]
+#        statuses: [ SUCCESS, FAILURE ]
 #  sequential:
 #    image: node
 #    requires:
