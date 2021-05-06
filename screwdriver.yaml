@@ -65,13 +65,13 @@ jobs:
 #      email:
 #        addresses: [ info@test.bi ]
 #        statuses: [ SUCCESS, FAILURE ]
-#  sequential:
-#    image: node
-#    requires:
-#      - main
-#    steps:
-#      - ls: echo $(ls)
-#      - parms: 'echo "Param1 $(meta get parameters.param1), Param2 $(meta get parameters.param2.value)"'
+  sequential:
+    image: node
+    requires:
+      - main
+    steps:
+      - ls: echo $(ls)
+      - parms: 'echo "Param1 $(meta get parameters.param1), Param2 $(meta get parameters.param2.value)"'
 #      - dock: DOCKER_HOST=tcp://localhost:2375 docker info
 #      - pack: (curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.18.1/pack-v0.18.1-linux.tgz" | sudo tar -C /usr/local/bin/ --no-same-owner -xzv pack)
   parallel:
@@ -82,15 +82,15 @@ jobs:
     steps:
       - ls: echo $(ls)
       - parms: 'echo "Param1 $(meta get parameters.param1), Param2 $(meta get parameters.param2.value)"'
-  afterparallel:
-    image: gcr.io/kaniko-project/executor:debug
-    requires:
-      - parallel
-    steps:
-      - kanikodir: mkdir -p /kaniko/.docker
-      - ls: echo $(ls)
-#      - createconfig: echo "{\"auths\":{\"https://index.docker.io/v1/\":{\"auth\":\"$REGISTRY_AUTH\"}}}" > /kaniko/.docker/config.json
-#      - check: cat /kaniko/.docker/config.json
-#      - buildimg: /kaniko/executor --context $DOCKER_CONTEXT --dockerfile $DOCKER_DIR/Dockerfile --destination $IMAGE_NAME:$IMAGE_TAG
-    secrets:
-      - REGISTRY_AUTH
+#  afterparallel:
+#    image: gcr.io/kaniko-project/executor:debug
+#    requires:
+#      - parallel
+#    steps:
+#      - kanikodir: mkdir -p /kaniko/.docker
+#      - ls: echo $(ls)
+##      - createconfig: echo "{\"auths\":{\"https://index.docker.io/v1/\":{\"auth\":\"$REGISTRY_AUTH\"}}}" > /kaniko/.docker/config.json
+##      - check: cat /kaniko/.docker/config.json
+##      - buildimg: /kaniko/executor --context $DOCKER_CONTEXT --dockerfile $DOCKER_DIR/Dockerfile --destination $IMAGE_NAME:$IMAGE_TAG
+#    secrets:
+#      - REGISTRY_AUTH
